@@ -8,5 +8,8 @@
 # Excluding Ansible retry files
 *.retry
 
-# Excluding vault files, this should be a sample file
+# Excluding vault files in group and host_vars, this should be a sample file
 host_vars/bc-ctf-vpn.yaml
+
+# Excliding vault files in roles, this should be sample files
+roles/bootstrap/defaults/main.yaml

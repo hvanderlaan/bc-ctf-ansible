@@ -1,0 +1,20 @@
+---
+# File      : roles/bootstrap/tasks/motd.yaml
+# Purpose   : Playbook for the boorstrap role to deploy a motd
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.
+
+- name: motd -> remove old or dynamic motd
+  ansible.builtin.file:
+    path: "/etc/update-motd.d"
+    state: absent
+
+- name: motd -> install managed motd
+  ansible.builtin.template:
+    src: motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644

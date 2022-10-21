@@ -1,0 +1,28 @@
+---
+# File      : roles/bootstrap/tasks/users.yaml
+# Purpose   : Playbook for the boorstrap role to deploy the users
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.
+
+- name: users -> install requirements
+  ansible.builtin.apt:
+    update_cache: True
+    cache_valid_time: 86400
+    name: "{{ item }}"
+    state: present
+  loop: "{{ sudo_packages }}"
+
+- name: users -> correct user
+  ansible.builtin.user:
+    name: "bcadmin"
+    groups: "sudo"
+    append: True
+    password: "{{ bcadmin_password }}"
+    state: present
+
+- name: users -> remove old sudoers config
+  ansible.builtin.file:
+    path: /etc/sudoers.d/90-cloud-init-users
+    state: absent

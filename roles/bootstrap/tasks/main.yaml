@@ -1,0 +1,47 @@
+---
+# File      : roles/bootstrap/tasks/main.yaml
+# Purpose   : Main playbook for the boorstrap role
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.1
+
+- name: pre bootstrap block
+  block:
+    - name: local_facts -> create local facts directory
+      ansible.builtin.file:
+        path: /etc/ansible/facts.d
+        owner: root
+        group: root
+        state: directory
+      register: factsdir
+
+    - name: local_facts -> stat is local facts file exists
+      ansible.builtin.stat:
+        path: /etc/ansible/facts.d/managed.fact
+      register: factsfile
+
+    - name: local_facts -> create local facts
+      ansible.builtin.template:
+        src: managed.fact.j2
+        dest: /etc/ansible/facts.d/managed.fact
+        owner: root
+        group: root
+        mode: 0644
+      when: factsdir.changed or factsfile.stat.exists == 'False'
+  when: ansible_local.managed is not defined
+
+- name: gather_facts -> getting new local facts
+  ansible.builtin.setup:
+
+- name: include -> motd
+  ansible.builtin.include_tasks: motd.yaml
+  when: ansible_local.managed.ansible.motd == 'True'
+
+- name: include -> users
+  ansible.builtin.include_tasks: users.yaml
+  when: ansible_local.managed.ansible.users == 'True'
+
+- name: include -> packages
+  ansible.builtin.include_tasks: packages.yaml
+  when: ansible_local.managed.ansible.packages == 'True'

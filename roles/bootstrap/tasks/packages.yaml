@@ -1,0 +1,15 @@
+---
+# File      : roles/bootstrap/tasks/packages.yaml
+# Purpose   : Playbook for the boorstrap role to install packages
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.
+
+- name: packages -> installing default packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: True
+    cache_valid_time: 86400
+    state: present
+  loop: "{{ defauilt_packages }}"
