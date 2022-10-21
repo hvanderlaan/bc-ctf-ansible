@@ -1,0 +1,12 @@
+# File      : .gitignore
+# Purpose   : Exclude files from version control
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.1
+
+# Excluding Ansible retry files
+*.retry
+
+# Excluding vault files, this should be a sample file
+host_vars/bc-ctf-vpn.yaml
