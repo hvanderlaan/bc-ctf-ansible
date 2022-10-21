@@ -9,6 +9,6 @@ ansible-playbook site.yaml --ask-vault-pass
 ```
 
 ## Todo
-  [X]: Create role for default bootstrapping
-  [ ]: Create role to install openvpn
-  [ ]: Create role for challenge servers
+[X] Create role for default bootstrapping
+[ ] Create role to install openvpn
+[ ] Create role for challenge servers
