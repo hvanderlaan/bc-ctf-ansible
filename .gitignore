@@ -10,6 +10,7 @@
 
 # Excluding vault files in group and host_vars, this should be a sample file
 host_vars/bc-ctf-vpn.yaml
+host_vars/bc-ctf-tutorial.yaml
 
 # Excliding vault files in roles, this should be sample files
 roles/bootstrap/defaults/main.yaml
