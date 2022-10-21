@@ -1,0 +1,24 @@
+---
+# File      : playbooks/update.yaml
+# Purpose   : Run updates on system
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.1
+
+- hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: updates -> updating repositories
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 86400
+      register: aptcache
+    
+    - name: updates -> downloading and installing updates
+      ansible.builtin.apt:
+        upgrade: full
+        autoclean: yes
+        auroremove: yes
+      when: aptcache.changed
