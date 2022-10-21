@@ -1,0 +1,13 @@
+---
+# File      : site.yaml
+# Purpose   : Deploy default configuration
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.1
+
+- hosts: all
+  gather_facts: true
+
+  roles:
+    - {role: bootstrap, become: true}

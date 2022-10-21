@@ -1,0 +1,22 @@
+---
+# File      : roles/bootstrap/defaults/main.yaml
+# Purpose   : Default variables for the role bootstrap
+#
+# Author    : Harald van der Laan
+# Date      : 2022/10/21
+# Version   : v0.0.
+
+# Password can be created with the following command:
+# pip3 install passlib
+# python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+#
+# use ansible-vault to encrypt this file
+# ansible-vault encrypt main.yaml
+bcadmin_password: ''
+
+defauilt_packages:
+  - vim
+  - curl
+
+sudo_packages:
+  - sudo
